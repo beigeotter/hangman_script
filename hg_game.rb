@@ -15,8 +15,7 @@ dash = "_ "
 blanks = dash * word_to_guess.length
 array_to_guess = word_to_guess.chars.to_a
 puts blanks
-#puts word_to_guess
-puts "Guess a letter"
+
 
 guessed_wrong = Array.new
 guessed_right = Array.new
@@ -158,6 +157,7 @@ def is_the_game_over(guessed_wrong)
 end
 
 while guessed_wrong.length < 7
+  puts "Guess a letter"
   guessed_letter = STDIN.gets.chomp() 
   already_guessed(guessed_letter, guessed_right, guessed_wrong)
   is_it_in_the_word(word_to_guess, guessed_letter, guessed_right, guessed_wrong)
