@@ -18,7 +18,6 @@ puts blanks
 #puts word_to_guess
 puts "Guess a letter"
 
-guessed_letter = "a"
 guessed_wrong = Array.new
 guessed_right = Array.new
 array_to_guess = word_to_guess.chars.to_a #an array from the word itself
