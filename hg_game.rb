@@ -1,15 +1,6 @@
 words = ["ant", "baboon", "badger", "bat", "bear", "beaver", "camel", "cat", "clam", "cobra", "cougar", "coyote", "crow", "deer", "dog", "donkey", "duck", "eagle", "ferret", "fox", "frog", "goat", "goose", "hawk", "lion", "lizard", "llama", "mole", "monkey", "moose", "mouse", "mule", "newt", "otter", "owl", "panda", "parrot", "pigeon", "python", "rabbit", "ram", "rat", "raven", "rhino", "salmon", "seal", "shark", "sheep", "skunk", "sloth", "snake", "spider", "stork", "swan", "tiger", "toad", "trout", "turkey", "turtle", "weasel", "whale", "wolf", "wombat", "zebra"]
-
-
-
-
-
-
-### Misc. variables up there, because I don't yet know how to copy them between files
-### Everything starts here
-###
-###
-
+puts "\e[H\e[2J"
+puts "WELCOME TO HANGMAN"
 word_to_guess = words.sample
 dash = "_ "
 blanks = dash * word_to_guess.length
@@ -33,18 +24,19 @@ def already_guessed(guessed_letter, guessed_right, guessed_wrong)
       puts "You already wrongly guessed this letter. Guess another"
   end
   
-  else
-    return "1"
 end
 
 def is_it_in_the_word(word_to_guess, guessed_letter, guessed_right, guessed_wrong)
 
   if word_to_guess.include?(guessed_letter)
       guessed_right.push(guessed_letter)
+      puts "Wrong #{guessed_wrong}"
       puts "Right #{guessed_right}"
   else
       guessed_wrong.push(guessed_letter)
       puts "Wrong #{guessed_wrong}"
+      puts "Right #{guessed_right}"
+      
   end
 
 end
@@ -158,16 +150,29 @@ end
 
 while guessed_wrong.length < 7
   puts "Guess a letter"
-  guessed_letter = STDIN.gets.chomp() 
+  guessed_letter = STDIN.gets.chomp()
+  puts "\e[H\e[2J"
+  puts "HANGMAN!"
+  puts "\n"
+  puts "\n"
+  if guessed_letter.length > 1
+    puts "Please enter a single letter"
+    next
+  end
+  if guessed_letter == ""
+    puts "Please do not enter a blank letter"
+    next
+  end
   already_guessed(guessed_letter, guessed_right, guessed_wrong)
   is_it_in_the_word(word_to_guess, guessed_letter, guessed_right, guessed_wrong)
   printing_image(guessed_wrong)
   puts print_guess_results(array_to_guess, guessed_right)
   puts "\n"
-    if guessed_right.length == array_to_guess.length
-      puts "YOU WON!!"
-      break
-    end
+  if guessed_right.length == array_to_guess.length
+    puts "YOU WON!!"
+    break
+  end
+
 end
 
 if guessed_wrong.length == 7
