@@ -125,6 +125,7 @@ array_to_guess = word_to_guess.chars.to_a #an array from the word itself
 while guessed_wrong.length < 7
   puts "Guess a letter"
   guessed_letter = STDIN.gets.chomp()
+  guessed_letter = guessed_letter.downcase
   puts "\e[H\e[2J"
   puts "HANGMAN!"
   puts "\n"
@@ -142,10 +143,7 @@ while guessed_wrong.length < 7
   printing_image(guessed_wrong)
   puts print_guess_results(array_to_guess, guessed_right)
   puts "\n"
-  
-  
-  #ISSUE REMAINS!!!
-  if print_guess_results(array_to_guess, guessed_right) == array_to_guess 
+  if !print_guess_results(array_to_guess, guessed_right).include?("_") 
     puts "YOU WON!!"
     break
   end
