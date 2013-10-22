@@ -6,7 +6,7 @@ end
 
 def is_it_in_the_word(word_to_guess, guessed_letter, guessed_right, guessed_wrong)
   if word_to_guess.include?(guessed_letter)
-    guessed_right.push(guessed_letter)
+    guessed_right.push(guessed_letter) if !guessed_right.include?(guessed_letter)
   else
     guessed_wrong.push(guessed_letter) if !guessed_wrong.include?(guessed_letter)
   end
@@ -142,7 +142,10 @@ while guessed_wrong.length < 7
   printing_image(guessed_wrong)
   puts print_guess_results(array_to_guess, guessed_right)
   puts "\n"
-  if guessed_right.length == array_to_guess.length
+  
+  
+  #ISSUE REMAINS!!!
+  if print_guess_results(array_to_guess, guessed_right) == array_to_guess 
     puts "YOU WON!!"
     break
   end
